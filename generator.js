@@ -59,11 +59,16 @@ TimeTable.prototype.printTable = function(teacherMap) {
 
 TimeTable.prototype.create = function(s4, s6, teacherMap) {
     let dayLabel, x;
-    const min = 0;
-    const max = 4;
+    const days = [0, 1, 2, 3, 4]; // Array to shuffle
 
-    for (x = 0, dayLabel = 0; x <= 4; x++, dayLabel++) {
-        const randomNumber = Math.floor(Math.random() * (max - min) + min);
+    // Shuffle the array of days
+    for (let i = days.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [days[i], days[j]] = [days[j], days[i]];
+    }
+
+    for (x = 0, dayLabel = 0; x < days.length; x++, dayLabel++) {
+        const randomNumber = days[x];
         this.copyDay(permutations(randomNumber, randomNumber, s4, s6), dayLabel);
     }
     this.printTable(teacherMap);
