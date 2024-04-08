@@ -1,0 +1,55 @@
+Algorithm to generate the time table for 4th and 6th sem
+
+[Constraints]: - 1 teacher teaches 2 subjects(one to 4, one to 6)
+- one teacher present at one class at a time
+- design for before break classes only; 4 classes
+
+= Declare TCMap DS which contains teacherId and class allocation at a given time
+Initialiaze class allocation as flag = -1
+
+= Declare two arrays of type TCMap
+-> TCMap[] sem4;
+-> TCMap[] sem6;
+
+= Declare a hashmap(int, string) - store the taecher names against their teacher Id
+
+= Define a printMap function to print the values of the TCMap
+= Define a search function which searches for the teacherId in the input array
+
+= Define a function permutation
+-> arguments: 2; type: TCMap []
+-> returns: int [][]
+-> uses int [2][4] day array; Do the initialization
+-> three pointers - i >> points to the list of teachers of sem4
+->                - j >> points to the list of teachers of sem6
+                  - ptr >> points to the day columns
+-> sem4 is sorted (asc)
+-> sem6 is sorted (desc)
+
+== Functionality
+Use a day array to arrange teachers in the classes for a single day
+loop runs until ptr<4
+i updates as i=(i+1)%sem4.length
+j updates as j=(j+1)%sem6.length
+
+# such that i remains looping in the list
+
+$ for sem4 teachers list directly copy the teacherId to the day[0] and replace teacherId's flag with ptr (column where the teacher is allocated the class)
+$ for sem6 some checking is required: copy the teacherId to the day[1] and replace teacherId's flag with ptr (colum where the teacher is allocated the class)
+  after this search the sem4 list for the same teacherId; if got then return the it's flag value else return -999
+
+= Define a TimeTable class
+-> 2 matrices of size 5x4 === int[5][4] fouth; int[5][4] sixth; Do the initialization
+  --> this matrix stores the time table for the whole week for fourth sem and sixth sem
+-> dayLabel: indicates the day of the week
+
+== Functionality
+for eachLabel < 5; permutation function is called and the retured day array is copies as:
+day[0] is copied to fourth[dayLabel]
+day[1] is copied to sixth[dayLabel]
+
+$ print the matrix to see the result
+
+
+  
+
